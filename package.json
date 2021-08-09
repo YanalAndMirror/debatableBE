@@ -1,0 +1,16 @@
+{
+  "name": "debatablebe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "yanalshmilan <yshmilan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.1.2",
+    "express": "^4.17.1",
+    "graphql": "^15.5.1",
+    "mongoose": "^5.13.5"
+  }
+}
