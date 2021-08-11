@@ -1,4 +1,10 @@
-const { gql } = require('apollo-server-express');
+/**
+ * @Octowl
+ *
+ * This file is conventionally called `schema.js`
+ */
+
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Post {
