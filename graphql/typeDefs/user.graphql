@@ -1,6 +1,6 @@
 # Types
 type User {
-  id: ID!
+  _id: ID!
   username: String!
   photo: String
   email: String!
@@ -9,7 +9,10 @@ type User {
   debates: [Debate]!
   createdAt: Date!
 }
-
+type userWithToken {
+  token: String!
+  user: User!
+}
 # Inputs
 input UserCreateInput {
   username: String!

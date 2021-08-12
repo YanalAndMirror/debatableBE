@@ -4,7 +4,7 @@ scalar Date
 type Query {
   # Users
   users: [User]!
-  user(id: ID!): User
+  user: User
 
   # Debates
   debates: [Debate]!
@@ -16,9 +16,12 @@ type Query {
 }
 
 type Mutation {
-  # Users
-  createUser(user: UserCreateInput!): User!
-  updateUser(id: ID!, user: UserUpdateInput!): User!
+  "create a new user"
+  createUser(user: UserCreateInput!): String
+  "update current user"
+  updateUser(user: UserUpdateInput!): User
+  "Sign in to user"
+  signin(username: String!, password: String!): userWithToken
 
   # Debates
   createDebate(debate: DebateCreateInput!): Debate!

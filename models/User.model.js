@@ -1,37 +1,36 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'Please add a username'],
+    required: [true, "Please add a username"],
     unique: true,
-    trim: true,
   },
   password: {
     type: String,
-    required: [true, 'Please add a password'],
-    minlength: [8, 'password can not be less than 8 characters'],
+    required: [true, "Please add a password"],
+    minlength: [8, "password can not be less than 8 characters"],
   },
   photo: {
     type: String,
   },
   email: {
     type: String,
-    required: [true, 'Please add your email'],
+    required: [true, "Please add your email"],
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please fill a valid email address',
+      "Please fill a valid email address",
     ],
     trim: true,
     lowercase: true,
     unique: true,
   },
   activity: [{ type: String }],
-  argues: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Argue' }],
-  debates: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Debate' }],
+  argues: [{ type: mongoose.Schema.Types.ObjectId, ref: "Argue" }],
+  debates: [{ type: mongoose.Schema.Types.ObjectId, ref: "Debate" }],
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model("User", UserSchema);
 module.exports = User;
