@@ -5,12 +5,17 @@
   "author": "yanalshmilan <yshmilan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js --exec babel-node"
   },
   "dependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0",
+    "@graphql-tools/schema": "^8.0.3",
     "apollo-server-express": "^3.1.2",
     "express": "^4.17.1",
     "graphql": "^15.5.1",
+    "lodash.merge": "^4.6.2",
     "mongoose": "^5.13.5"
   }
 }

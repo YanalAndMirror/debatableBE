@@ -1,0 +1,24 @@
+# Types
+type User {
+  id: ID!
+  username: String!
+  photo: String
+  email: String!
+  activity: [String]
+  argues: [Argue]
+  debates: [Debate]!
+  createdAt: Date!
+}
+
+# Inputs
+input UserCreateInput {
+  username: String!
+  password: String!
+  email: String!
+}
+
+input UserUpdateInput {
+  username: String!
+  password: String!
+  email: String!
+}

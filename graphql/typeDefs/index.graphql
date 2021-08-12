@@ -1,0 +1,30 @@
+# Custom Scalars
+scalar Date
+
+type Query {
+  # Users
+  users: [User]!
+  user(id: ID!): User
+
+  # Debates
+  debates: [Debate]!
+  debate(id: ID!): Debate
+
+  # Argue
+  arguements: [Argue]!
+  argue(id: ID!): Argue
+}
+
+type Mutation {
+  # Users
+  createUser(user: UserCreateInput!): User!
+  updateUser(id: ID!, user: UserUpdateInput!): User!
+
+  # Debates
+  createDebate(debate: DebateCreateInput!): Debate!
+  updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!
+
+  # Arguements
+  createArgue(argue: ArgueCreateInput!): Argue!
+  updateArgue(id: ID!, argue: ArgueUpdateInput!): Argue!
+}

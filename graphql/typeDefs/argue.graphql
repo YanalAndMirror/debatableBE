@@ -1,0 +1,23 @@
+# Types
+type Argue {
+  id: ID!
+  description: String!
+  arguements: [Argue]
+  votes: [User]
+  author: User
+  argueType: String
+  debate: Debate
+  createdAt: Date!
+}
+
+# Inputs
+input ArgueCreateInput {
+  description: String!
+  author: ID
+  argueType: String
+  debate: ID
+}
+
+input ArgueUpdateInput {
+  description: String!
+}

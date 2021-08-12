@@ -1,0 +1,27 @@
+# Types
+type Debate {
+  id: ID!
+  title: String!
+  description: String!
+  photo: String!
+  votes: [User]
+  views: [User]
+  author: User
+  participants: [User]
+  argues: [Argue]
+  createdAt: Date
+}
+
+# Inputs
+input DebateCreateInput {
+  title: String!
+  description: String!
+  photo: String!
+  author: ID
+}
+
+input DebateUpdateInput {
+  title: String!
+  description: String!
+  photo: String!
+}
