@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema({
   activity: [{ type: String }],
   argues: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Argue' }],
   debates: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Debate' }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

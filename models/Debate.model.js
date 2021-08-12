@@ -17,6 +17,10 @@ const DebateSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   participants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   argues: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Argue' }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 const Debate = mongoose.model('Debate', DebateSchema);
 module.exports = Debate;
