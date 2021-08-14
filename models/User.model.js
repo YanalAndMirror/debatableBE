@@ -24,9 +24,6 @@ const UserSchema = new mongoose.Schema({
     lowercase: true,
     unique: true,
   },
-  activity: [{ type: String }],
-  argues: [{ type: mongoose.Schema.Types.ObjectId, ref: "Argue" }],
-  debates: [{ type: mongoose.Schema.Types.ObjectId, ref: "Debate" }],
   createdAt: {
     type: Date,
     default: Date.now,

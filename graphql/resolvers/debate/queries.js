@@ -1,5 +1,8 @@
+const Debate = require("../../../models/Debate.model");
 const debateQueries = {
-  debates: async (_, args) => {},
+  debates: async () => {
+    return await Debate.find();
+  },
   debate: async (_, args) => {},
 };
 

@@ -1,5 +1,10 @@
+const Argue = require("../../../models/Argue.model");
+
 const argueQueries = {
-  arguements: async (_, args) => {},
+  argues: async (_, { filter }) => {
+    const argues = await Argue.find(filter).populate("argues");
+    return argues;
+  },
   argue: async (_, args) => {},
 };
 
