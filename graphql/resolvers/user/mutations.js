@@ -5,9 +5,13 @@ const userMutations = {
     const thisUser = await User.create({ username, password, email });
     const tokenData = { _id: thisUser._id };
     // return token
-    return sign(tokenData, "SuperSecretKey", {
+    let token = sign(tokenData, "SuperSecretKey", {
       expiresIn: 60 * 60 * 7 * 1000,
     });
+    return {
+      token,
+      user: thisUser,
+    };
   },
   updateUser: async (_, { user }, { req }) => {
     const thisUser = await User.findOneAndUpdate({ _id: req.user }, user, {

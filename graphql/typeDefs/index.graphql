@@ -10,21 +10,20 @@ type Query {
   debates: [Debate]!
   debate(id: ID!): Debate
 
-  # Argue
-  arguements: [Argue]!
+  "Get arguments by debate or argue"
+  argues(filter: ArgueFilter): [Argue]
   argue(id: ID!): Argue
 }
 
 type Mutation {
   "create a new user"
-  createUser(user: UserCreateInput!): String
+  createUser(user: UserCreateInput!): userWithToken
   "update current user"
   updateUser(user: UserUpdateInput!): User
   "Sign in to user"
   signin(username: String!, password: String!): userWithToken
-
-  # Debates
-  createDebate(debate: DebateCreateInput!): Debate!
+  "Create a new debate , with one main argue"
+  createDebate(debate: DebateCreateInput!): Debate
   updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!
 
   # Arguements

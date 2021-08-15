@@ -1,8 +1,9 @@
-import Argue from '../../../models/User.model';
+const Argue = require('../../../models/Argue.model');
 
 const argueQueries = {
-  arguements: async (_, args) => {
-    return Argue.find();
+  argues: async (_, { filter }) => {
+    const argues = await Argue.find(filter).populate('argues');
+    return argues;
   },
   argue: async (_, args) => {},
 };

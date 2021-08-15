@@ -1,23 +1,16 @@
 # Types
 type Debate {
   id: ID!
-  title: String!
-  description: String!
-  photo: String!
-  votes: [User]
-  views: [User]
-  author: User
-  participants: [User]
-  argues: [Argue]
+  title: String
+  photo: String
   createdAt: Date
 }
 
 # Inputs
 input DebateCreateInput {
   title: String!
-  description: String!
   photo: String!
-  author: ID
+  argue: String!
 }
 
 input DebateUpdateInput {

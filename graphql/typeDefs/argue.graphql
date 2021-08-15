@@ -1,23 +1,30 @@
 # Types
 type Argue {
   id: ID!
-  description: String!
-  arguements: [Argue]
-  votes: [User]
-  author: User
   argueType: String
-  debate: Debate
+  content: String
+  parent: Debate
+  createdAt: Date!
+  argues: [miniArgue]
+}
+type miniArgue {
+  id: ID!
+  argueType: String
+  content: String
+  parent: Debate
   createdAt: Date!
 }
-
 # Inputs
 input ArgueCreateInput {
-  description: String!
-  author: ID
+  content: String!
   argueType: String
-  debate: ID
+  debate: String
+  parent: String
 }
-
+input ArgueFilter {
+  debate: String
+  argue: String
+}
 input ArgueUpdateInput {
   description: String!
 }
