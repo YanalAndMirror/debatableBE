@@ -29,5 +29,6 @@ ArgueSchema.virtual("argues", {
   foreignField: "parent",
   justOne: false,
 });
+
 const Argue = mongoose.model("Argue", ArgueSchema);
 module.exports = Argue;
