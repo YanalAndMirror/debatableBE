@@ -1,7 +1,7 @@
 const { sign } = require("jsonwebtoken");
 const User = require("../../../models/User.model");
 const userMutations = {
-  createUser: async (_, { user: { username, password, email } }) => {
+  signup: async (_, { user: { username, password, email } }) => {
     const thisUser = await User.create({ username, password, email });
     const tokenData = { _id: thisUser._id };
     // return token

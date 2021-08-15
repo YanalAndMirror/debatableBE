@@ -12,6 +12,13 @@ const debateMutations = {
     });
     return newDebate;
   },
+  addDebateView: async (_, { debate }) => {
+    return await Debate.findByIdAndUpdate(
+      debate,
+      { $inc: { views: 1 } },
+      { new: true }
+    );
+  },
   updateDebate: async (_, args) => {},
 };
 

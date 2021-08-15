@@ -4,6 +4,7 @@ type Debate {
   title: String
   photo: String
   createdAt: Date
+  ArguesCount: Int
 }
 
 # Inputs
