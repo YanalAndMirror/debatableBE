@@ -1,18 +1,15 @@
 # Types
 type Argue {
-  id: ID!
+  _id: ID!
   argueType: String
   content: String
-  parent: Debate
+  parent: String
   createdAt: Date!
-  argues: [miniArgue]
+  votes: Votes
 }
-type miniArgue {
-  id: ID!
-  argueType: String
-  content: String
-  parent: Debate
-  createdAt: Date!
+type Votes {
+  number: Int
+  amount: Int
 }
 # Inputs
 input ArgueCreateInput {

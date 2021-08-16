@@ -8,11 +8,10 @@ type Query {
 
   # Debates
   debates: [Debate]!
-  debate(id: ID!): Debate
+  debate(slug: String!): DebateDetail
 
   "Get arguments by debate or argue"
   argues(filter: ArgueFilter): [Argue]
-  argue(id: ID!): Argue
 }
 
 type Mutation {
@@ -30,6 +29,7 @@ type Mutation {
   updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!
 
   # Arguements
+  vote(argue: String, value: Int): Argue
+
   createArgue(argue: ArgueCreateInput!): Argue!
-  updateArgue(id: ID!, argue: ArgueUpdateInput!): Argue!
 }
