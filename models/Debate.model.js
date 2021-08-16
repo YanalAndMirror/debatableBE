@@ -32,6 +32,12 @@ const DebateSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
+    tags: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },

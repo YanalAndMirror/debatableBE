@@ -8,6 +8,7 @@ type Debate {
   argueVotes: Int
   participants: Int
   slug: String!
+  tags: [Tag]
 }
 type DebateDetail {
   _id: ID!
@@ -17,6 +18,11 @@ type DebateDetail {
   arguesCount: Int
   slug: String!
   argues: [Argue]
+}
+type Tag {
+  _id: ID!
+  title: String
+  photo: String
 }
 # Inputs
 input DebateCreateInput {
