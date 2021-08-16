@@ -4,7 +4,9 @@ type Debate {
   title: String
   photo: String
   createdAt: Date
-  arguesCount: Int
+  argueCount: Int
+  argueVotes: Int
+  participants: Int
   slug: String!
 }
 type DebateDetail {
