@@ -16,10 +16,21 @@ const DebateSchema = new mongoose.Schema(
       type: String,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-
     createdAt: {
       type: Date,
       default: Date.now,
+    },
+    argueCount: {
+      type: Number,
+      default: 1,
+    },
+    argueVotes: {
+      type: Number,
+      default: 0,
+    },
+    participants: {
+      type: Number,
+      default: 1,
     },
   },
   {
@@ -27,12 +38,6 @@ const DebateSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-DebateSchema.virtual("arguesCount", {
-  ref: "Argue",
-  localField: "_id",
-  foreignField: "debate",
-  count: true,
-});
 DebateSchema.virtual("argues", {
   ref: "Argue",
   localField: "_id",
