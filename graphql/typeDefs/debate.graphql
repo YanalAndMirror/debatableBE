@@ -1,12 +1,21 @@
 # Types
 type Debate {
-  id: ID!
+  _id: ID!
   title: String
   photo: String
   createdAt: Date
-  ArguesCount: Int
+  arguesCount: Int
+  slug: String!
 }
-
+type DebateDetail {
+  _id: ID!
+  title: String
+  photo: String
+  createdAt: Date
+  arguesCount: Int
+  slug: String!
+  argues: [Argue]
+}
 # Inputs
 input DebateCreateInput {
   title: String!

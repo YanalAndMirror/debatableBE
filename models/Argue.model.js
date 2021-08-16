@@ -13,6 +13,16 @@ const ArgueSchema = new mongoose.Schema(
       ref: "Argue",
       required: false,
     },
+    votes: {
+      amount: {
+        type: Number,
+        default: 0,
+      },
+      number: {
+        type: Number,
+        default: 0,
+      },
+    },
     createdAt: {
       type: Date,
       default: Date.now,
