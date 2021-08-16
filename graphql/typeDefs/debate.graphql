@@ -9,6 +9,7 @@ type Debate {
   participants: Int
   slug: String!
   tags: [Tag]
+  views: Int
 }
 type DebateDetail {
   _id: ID!
