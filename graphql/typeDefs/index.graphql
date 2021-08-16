@@ -7,7 +7,7 @@ type Query {
   user: User
 
   # Debates
-  debates(order: String): [Debate]!
+  debates(order: String, start: Int, amount: Int): [Debate]!
   debate(slug: String!): DebateDetail
 
   "Get arguments by debate or argue"
