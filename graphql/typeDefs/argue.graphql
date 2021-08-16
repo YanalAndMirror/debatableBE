@@ -1,0 +1,27 @@
+# Types
+type Argue {
+  _id: ID!
+  argueType: String
+  content: String
+  parent: String
+  createdAt: Date!
+  votes: Votes
+}
+type Votes {
+  number: Int
+  amount: Int
+}
+# Inputs
+input ArgueCreateInput {
+  content: String!
+  argueType: String
+  debate: String
+  parent: String
+}
+input ArgueFilter {
+  debate: String
+  argue: String
+}
+input ArgueUpdateInput {
+  description: String!
+}

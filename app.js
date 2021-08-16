@@ -1,18 +1,25 @@
-const connectDb = require('./db');
-const express = require('express');
-const { ApolloServer, gql } = require('apollo-server-express');
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
-const mongoose = require('mongoose');
+const connectDb = require("./db");
+const express = require("express");
+const apolloServer = require("./graphql/index");
+const tokenValidate = require("./middlewares/tokenValidate");
+const upload = require("./middlewares/multer");
+const cors = require("cors");
 
 connectDb();
 
 const startServer = async () => {
   const app = express();
-  const apolloServer = new ApolloServer({ typeDefs, resolvers });
   await apolloServer.start();
+  app.use(cors());
+  app.use(tokenValidate);
+  app.use("/upload", express.static("upload"));
+  app.post("/uploadImage", upload.single("file"), (req, res, next) => {
+    res
+      .status(201)
+      .json(`http://${req.get("host")}/upload/${req.file.filename}`);
+  });
 
   apolloServer.applyMiddleware({ app: app });
-  app.listen(4000, () => console.log('server is running on port 4000'));
+  app.listen(4000, () => console.log("server is running on port 4000"));
 };
 startServer();
