@@ -7,7 +7,7 @@ type Query {
   user: User
 
   # Debates
-  debates(order: String, start: Int, amount: Int): [Debate]!
+  debates(order: String, start: Int, amount: Int, tag: String): [Debate]!
   debate(slug: String!): DebateDetail
 
   "Get arguments by debate or argue"
@@ -25,6 +25,7 @@ type Mutation {
   createDebate(debate: DebateCreateInput!): Debate
   "Add 1 view to debate"
   addDebateView(debate: String): Debate
+  addTag(title: String, photo: String): Tag
 
   updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!
 
