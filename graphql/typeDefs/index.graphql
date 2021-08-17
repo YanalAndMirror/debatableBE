@@ -7,9 +7,15 @@ type Query {
   user: User
 
   # Debates
-  debates(order: String, start: Int, amount: Int, tag: String): [Debate]!
+  debates(
+    order: String
+    start: Int
+    amount: Int
+    tag: String
+    keyword: String
+  ): [Debate]!
   debate(slug: String!): DebateDetail
-
+  tags: [Tag]
   "Get arguments by debate or argue"
   argues(filter: ArgueFilter): [Argue]
 }
