@@ -30,6 +30,7 @@ input DebateCreateInput {
   title: String!
   photo: String!
   argue: String!
+  tags: [String]
 }
 
 input DebateUpdateInput {
