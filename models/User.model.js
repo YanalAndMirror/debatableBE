@@ -41,5 +41,23 @@ UserSchema.virtual("notifications", {
   foreignField: "user",
   justOne: false,
 });
+UserSchema.virtual("debates", {
+  ref: "Debate",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
+UserSchema.virtual("argues", {
+  ref: "Argue",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
+UserSchema.virtual("votesCount", {
+  ref: "Vote",
+  localField: "_id",
+  foreignField: "user",
+  count: true,
+});
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
