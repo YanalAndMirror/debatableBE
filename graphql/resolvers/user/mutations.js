@@ -18,6 +18,7 @@ const userMutations = {
     }
   },
   updateUser: async (_, { user }, { req }) => {
+    if (!req.user) return null;
     const thisUser = await User.findOneAndUpdate({ _id: req.user }, user, {
       new: true,
     });
@@ -35,8 +36,31 @@ const userMutations = {
         user: thisUser,
       };
     }
-
     return null;
+  },
+  follow: async (_, { debate }, { req }) => {
+    if (!req.user) return null;
+    return await User.findOneAndUpdate(
+      { _id: req.user, followed: { $ne: debate } },
+      { $push: { followed: debate } },
+      {
+        new: true,
+      }
+    );
+  },
+  clearNotifications: async (_, __, { req }) => {
+    if (!req.user) return null;
+    return await User.findOneAndUpdate(
+      { _id: req.user },
+      {
+        $set: {
+          "notifications.$[].seen": true,
+        },
+      },
+      {
+        new: true,
+      }
+    );
   },
 };
 

@@ -6,7 +6,12 @@ const userQueries = {
   },
   user: async (_, __, { req }) => {
     if (req.user) {
-      const thisUser = await User.findById(req.user);
+      const thisUser = await User.findById(req.user).populate({
+        path: "notifications",
+        populate: {
+          path: "debate",
+        },
+      });
       return thisUser;
     }
   },

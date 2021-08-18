@@ -4,14 +4,20 @@ type User {
   username: String!
   photo: String
   email: String!
-  activity: [String]
-  argues: [Argue]
-  debates: [Debate]!
+  followed: [String]
   createdAt: Date!
+  notifications: [Notification]
 }
 type userWithToken {
   token: String!
   user: User!
+}
+type Notification {
+  text: String
+  debate: Debate
+  argue: String
+  seen: Boolean
+  createdAt: Date
 }
 # Inputs
 input UserCreateInput {

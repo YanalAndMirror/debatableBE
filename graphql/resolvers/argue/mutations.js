@@ -1,6 +1,8 @@
+import { reconstructNotifications } from "../../../util/notifications";
 const Argue = require("../../../models/Argue.model");
 const Vote = require("../../../models/Vote.model");
 const Debate = require("../../../models/Debate.model");
+const User = require("../../../models/User.model");
 
 const argueMutations = {
   createArgue: async (
@@ -26,6 +28,8 @@ const argueMutations = {
         },
       }
     );
+
+    reconstructNotifications(newArgue._id);
     return newArgue;
   },
   vote: async (_, { argue, value }, { req }) => {

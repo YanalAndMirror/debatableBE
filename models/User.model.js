@@ -28,6 +28,18 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  followed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Debate",
+    },
+  ],
+});
+UserSchema.virtual("notifications", {
+  ref: "Notification",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
 });
 const User = mongoose.model("User", UserSchema);
 module.exports = User;
