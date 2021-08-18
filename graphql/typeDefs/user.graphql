@@ -29,4 +29,6 @@ input UserCreateInput {
 input UserUpdateInput {
   username: String
   photo: String
+  password: String
+  email: String
 }
