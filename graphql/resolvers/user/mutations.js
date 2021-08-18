@@ -1,5 +1,8 @@
 const { sign } = require("jsonwebtoken");
 const User = require("../../../models/User.model");
+
+const Notification = require("../../../models/Notification.model");
+
 const userMutations = {
   signup: async (_, { user: { username, password, email } }) => {
     try {
@@ -50,17 +53,13 @@ const userMutations = {
   },
   clearNotifications: async (_, __, { req }) => {
     if (!req.user) return null;
-    return await User.findOneAndUpdate(
-      { _id: req.user },
-      {
-        $set: {
-          "notifications.$[].seen": true,
-        },
+    await Notification.updateMany({ seen: false }, { seen: true });
+    return await User.findById(req.user).populate({
+      path: "notifications",
+      populate: {
+        path: "debate",
       },
-      {
-        new: true,
-      }
-    );
+    });
   },
 };
 
