@@ -7,6 +7,10 @@ type User {
   followed: [String]
   createdAt: Date!
   notifications: [Notification]
+  debates: [Debate]
+  otherDebates: [Debate]
+  votesCount: Int
+  arguesCount: Int
 }
 type userWithToken {
   token: String!
