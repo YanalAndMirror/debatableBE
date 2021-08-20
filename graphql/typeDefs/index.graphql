@@ -13,8 +13,17 @@ type Query {
     amount: Int
     tag: String
     keyword: String
-  ): [Debate]!
+  ): [Debate]
+
   debate(slug: String!): DebateDetail
+  rooms(
+    order: String
+    start: Int
+    amount: Int
+    tag: String
+    keyword: String
+  ): [Room]
+  room(slug: String!): Room
   tags: [Tag]
   "Get arguments by debate or argue"
   argues(filter: ArgueFilter): [Argue]
@@ -37,7 +46,9 @@ type Mutation {
   addDebateView(debate: String): Debate
   "add a tage"
   addTag(title: String, photo: String): Tag
-
+  "create a room"
+  createRoom(room: RoomCreateInput!): Room
+  roomStatus(slug: String): Room
   updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!
 
   # Arguements

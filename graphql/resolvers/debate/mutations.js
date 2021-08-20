@@ -1,4 +1,6 @@
 const Debate = require("../../../models/Debate.model");
+const Room = require("../../../models/Room.model");
+
 const Argue = require("../../../models/Argue.model");
 const Tag = require("../../../models/Tag.model");
 
@@ -22,6 +24,24 @@ const debateMutations = {
     });
     newDebate.arguesCount = 1;
     return newDebate;
+  },
+  createRoom: async (_, { room: { title, photo, tags } }, { req }) => {
+    if (!req.user) return null;
+    let newRoom = await Room.create({
+      title,
+      photo,
+      user: req.user,
+      tags,
+    });
+    return newRoom;
+  },
+  roomStatus: async (_, { slug }, { req }) => {
+    if (!req.user) return null;
+    return await Room.findOneAndUpdate(
+      { slug },
+      { status: "live" },
+      { new: true }
+    );
   },
   addDebateView: async (_, { debate }) => {
     return await Debate.findByIdAndUpdate(

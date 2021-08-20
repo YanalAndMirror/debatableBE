@@ -11,6 +11,12 @@ type Debate {
   tags: [Tag]
   views: Int
 }
+type Room {
+  _id: ID!
+  title: String
+  slug: String
+  user: String
+}
 type DebateDetail {
   _id: ID!
   title: String
@@ -32,7 +38,11 @@ input DebateCreateInput {
   argue: String!
   tags: [String]
 }
-
+input RoomCreateInput {
+  title: String!
+  photo: String!
+  tags: [String]
+}
 input DebateUpdateInput {
   title: String!
   description: String!
