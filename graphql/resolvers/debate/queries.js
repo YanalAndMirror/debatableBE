@@ -56,7 +56,7 @@ const debateQueries = {
       .limit(amount);
   },
   room: async (_, { slug }) => {
-    let thisRoom = await Room.findOne({ slug });
+    let thisRoom = await Room.findOne({ slug }).populate("debate");
     return thisRoom;
   },
 };

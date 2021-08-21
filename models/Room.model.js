@@ -11,6 +11,7 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       defualt: "Off",
     },
+    debate: { type: mongoose.Schema.Types.ObjectId, ref: "Debate" },
 
     slug: { type: String, slug: "title", unique: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -21,7 +22,7 @@ const RoomSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 const Debate = mongoose.model("Room", RoomSchema);
 module.exports = Debate;

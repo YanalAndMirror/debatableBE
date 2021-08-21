@@ -16,6 +16,7 @@ type Room {
   title: String
   slug: String
   user: String
+  debate: Debate
 }
 type DebateDetail {
   _id: ID!
@@ -42,6 +43,7 @@ input RoomCreateInput {
   title: String!
   photo: String!
   tags: [String]
+  debate: String
 }
 input DebateUpdateInput {
   title: String!

@@ -25,13 +25,15 @@ const debateMutations = {
     newDebate.arguesCount = 1;
     return newDebate;
   },
-  createRoom: async (_, { room: { title, photo, tags } }, { req }) => {
+  createRoom: async (_, { room: { title, photo, tags, debate } }, { req }) => {
     if (!req.user) return null;
+
     let newRoom = await Room.create({
       title,
       photo,
       user: req.user,
       tags,
+      debate,
     });
     return newRoom;
   },
