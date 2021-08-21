@@ -40,10 +40,8 @@ input DebateCreateInput {
   tags: [String]
 }
 input RoomCreateInput {
-  title: String!
-  photo: String!
-  tags: [String]
   debate: String
+  title: String
 }
 input DebateUpdateInput {
   title: String!

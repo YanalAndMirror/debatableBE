@@ -1,8 +1,8 @@
-const Debate = require("../../../models/Debate.model");
-const Room = require("../../../models/Room.model");
+const Debate = require('../../../models/Debate.model');
+const Room = require('../../../models/Room.model');
 
-const Argue = require("../../../models/Argue.model");
-const Tag = require("../../../models/Tag.model");
+const Argue = require('../../../models/Argue.model');
+const Tag = require('../../../models/Tag.model');
 
 const debateMutations = {
   createDebate: async (
@@ -25,14 +25,12 @@ const debateMutations = {
     newDebate.arguesCount = 1;
     return newDebate;
   },
-  createRoom: async (_, { room: { title, photo, tags, debate } }, { req }) => {
+  createRoom: async (_, { room: { title, debate } }, { req }) => {
     if (!req.user) return null;
 
     let newRoom = await Room.create({
       title,
-      photo,
       user: req.user,
-      tags,
       debate,
     });
     return newRoom;
@@ -41,7 +39,7 @@ const debateMutations = {
     if (!req.user) return null;
     return await Room.findOneAndUpdate(
       { slug },
-      { status: "live" },
+      { status: 'live' },
       { new: true }
     );
   },

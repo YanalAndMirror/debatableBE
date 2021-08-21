@@ -50,13 +50,13 @@ const debateQueries = {
       filter.title = { $regex: '.*' + keyword + '.*', $options: 'i' };
     }
     return await Room.find(filter)
-      .populate('tags')
+      .populate('tags debate')
       .sort(orderBy)
       .skip(start)
       .limit(amount);
   },
   room: async (_, { slug }) => {
-    let thisRoom = await Room.findOne({ slug }).populate("debate");
+    let thisRoom = await Room.findOne({ slug }).populate('debate');
     return thisRoom;
   },
 };
