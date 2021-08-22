@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-var slug = require('mongoose-slug-generator');
+const mongoose = require("mongoose");
+var slug = require("mongoose-slug-generator");
 mongoose.plugin(slug);
 const RoomSchema = new mongoose.Schema(
   {
@@ -8,20 +8,26 @@ const RoomSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: 'Off',
+      default: "Off",
     },
-    debate: { type: mongoose.Schema.Types.ObjectId, ref: 'Debate' },
+    vote: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        side: { type: String, enum: ["right", "left"] },
+      },
+    ],
+    debate: { type: mongoose.Schema.Types.ObjectId, ref: "Debate" },
 
-    slug: { type: String, slug: 'title', unique: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    slug: { type: String, slug: "title", unique: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag',
+        ref: "Tag",
       },
     ],
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
-const Debate = mongoose.model('Room', RoomSchema);
+const Debate = mongoose.model("Room", RoomSchema);
 module.exports = Debate;

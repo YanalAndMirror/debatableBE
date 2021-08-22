@@ -17,6 +17,7 @@ type Room {
   slug: String
   user: String
   debate: Debate
+  vote: [roomVote]
 }
 type DebateDetail {
   _id: ID!
@@ -31,6 +32,10 @@ type Tag {
   _id: ID!
   title: String
   photo: String
+}
+type roomVote {
+  user: String!
+  side: String!
 }
 # Inputs
 input DebateCreateInput {

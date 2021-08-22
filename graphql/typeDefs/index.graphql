@@ -50,7 +50,7 @@ type Mutation {
   createRoom(room: RoomCreateInput!): Room
   roomStatus(slug: String): Room
   updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!
-
+  addRoomVote(slug: String!, side: String!): Room
   # Arguements
   vote(argue: String, value: Int): Argue
 

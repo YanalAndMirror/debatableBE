@@ -1,8 +1,8 @@
-const Debate = require('../../../models/Debate.model');
-const Room = require('../../../models/Room.model');
+const Debate = require("../../../models/Debate.model");
+const Room = require("../../../models/Room.model");
 
-const Argue = require('../../../models/Argue.model');
-const Tag = require('../../../models/Tag.model');
+const Argue = require("../../../models/Argue.model");
+const Tag = require("../../../models/Tag.model");
 
 const debateMutations = {
   createDebate: async (
@@ -39,7 +39,7 @@ const debateMutations = {
     if (!req.user) return null;
     return await Room.findOneAndUpdate(
       { slug },
-      { status: 'live' },
+      { status: "live" },
       { new: true }
     );
   },
@@ -52,6 +52,25 @@ const debateMutations = {
   },
   addTag: async (_, { title, photo }) => {
     return await Tag.create({ title, photo });
+  },
+  addRoomVote: async (_, { slug, side }, { req }) => {
+    if (!req.user) return null;
+    await Room.updateOne(
+      { slug },
+      {
+        $pull: { vote: { user: req.user } },
+      }
+    );
+    const newRoom = await Room.findOneAndUpdate(
+      { slug },
+      {
+        $push: { vote: { user: req.user, side } },
+      },
+      {
+        new: true,
+      }
+    );
+    return newRoom;
   },
   updateDebate: async (_, args) => {},
 };
