@@ -50,5 +50,11 @@ DebateSchema.virtual("argues", {
   foreignField: "debate",
   justOne: false,
 });
+DebateSchema.virtual("room", {
+  ref: "Room",
+  localField: "_id",
+  foreignField: "debate",
+  justOne: true,
+});
 const Debate = mongoose.model("Debate", DebateSchema);
 module.exports = Debate;

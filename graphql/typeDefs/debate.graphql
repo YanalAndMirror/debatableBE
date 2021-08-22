@@ -10,6 +10,7 @@ type Debate {
   slug: String!
   tags: [Tag]
   views: Int
+  room: Room
 }
 type Room {
   _id: ID!
@@ -18,6 +19,7 @@ type Room {
   user: String
   debate: Debate
   vote: [roomVote]
+  live: Boolean
 }
 type DebateDetail {
   _id: ID!

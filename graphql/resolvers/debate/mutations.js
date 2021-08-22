@@ -27,7 +27,12 @@ const debateMutations = {
   },
   createRoom: async (_, { room: { title, debate } }, { req }) => {
     if (!req.user) return null;
-
+    let oldRoom = await Room.findOne({ debate });
+    if (oldRoom && oldRoom.live) {
+      console.log("here");
+      return oldRoom;
+    }
+    await Room.deleteOne({ debate });
     let newRoom = await Room.create({
       title,
       user: req.user,

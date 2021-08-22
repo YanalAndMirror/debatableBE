@@ -29,5 +29,9 @@ const RoomSchema = new mongoose.Schema(
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+RoomSchema.virtual("live").get(function () {
+  if ((Date.now() - this.updatedAt.getTime()) / 1000 > 15 * 60) return false;
+  else return true;
+});
 const Debate = mongoose.model("Room", RoomSchema);
 module.exports = Debate;
