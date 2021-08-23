@@ -10,6 +10,16 @@ type Debate {
   slug: String!
   tags: [Tag]
   views: Int
+  room: Room
+}
+type Room {
+  _id: ID!
+  title: String
+  slug: String
+  user: String
+  debate: Debate
+  vote: [roomVote]
+  live: Boolean
 }
 type DebateDetail {
   _id: ID!
@@ -19,19 +29,29 @@ type DebateDetail {
   arguesCount: Int
   slug: String!
   argues: [Argue]
+  room: Room
 }
 type Tag {
   _id: ID!
   title: String
   photo: String
 }
+type roomVote {
+  user: String!
+  side: String!
+}
 # Inputs
 input DebateCreateInput {
   title: String!
   photo: String!
   argue: String!
+  tags: [String]
+  club: String
 }
-
+input RoomCreateInput {
+  debate: String
+  title: String
+}
 input DebateUpdateInput {
   title: String!
   description: String!

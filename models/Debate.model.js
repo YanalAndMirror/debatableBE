@@ -16,6 +16,7 @@ const DebateSchema = new mongoose.Schema(
       type: String,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    club: { type: mongoose.Schema.Types.ObjectId, ref: "Club" },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -49,6 +50,12 @@ DebateSchema.virtual("argues", {
   localField: "_id",
   foreignField: "debate",
   justOne: false,
+});
+DebateSchema.virtual("room", {
+  ref: "Room",
+  localField: "_id",
+  foreignField: "debate",
+  justOne: true,
 });
 const Debate = mongoose.model("Debate", DebateSchema);
 module.exports = Debate;

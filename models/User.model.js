@@ -28,6 +28,41 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  followed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Debate",
+    },
+  ],
+});
+UserSchema.virtual("notifications", {
+  ref: "Notification",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
+UserSchema.virtual("debates", {
+  ref: "Debate",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
+UserSchema.virtual("argues", {
+  ref: "Argue",
+  localField: "_id",
+  foreignField: "user",
+  justOne: false,
+});
+UserSchema.virtual("votesCount", {
+  ref: "Vote",
+  localField: "_id",
+  foreignField: "user",
+  count: true,
+});
+UserSchema.virtual("clubs", {
+  ref: "Club",
+  localField: "_id",
+  foreignField: "users",
 });
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

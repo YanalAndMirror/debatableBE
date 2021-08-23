@@ -1,6 +1,8 @@
+import { reconstructNotifications } from "../../../util/notifications";
 const Argue = require("../../../models/Argue.model");
 const Vote = require("../../../models/Vote.model");
 const Debate = require("../../../models/Debate.model");
+const User = require("../../../models/User.model");
 
 const argueMutations = {
   createArgue: async (
@@ -9,6 +11,9 @@ const argueMutations = {
     { req }
   ) => {
     if (!req.user) return null;
+    let thisDebate = await Debate.findById(debate).populate("club");
+    if (thisDebate.club && !thisDebaate.club.users.includes(req.user))
+      return null;
     let checkParicipation = await Argue.findOne({ user: req.user, debate });
     let newArgue = await Argue.create({
       content,
@@ -26,6 +31,8 @@ const argueMutations = {
         },
       }
     );
+
+    reconstructNotifications(newArgue._id);
     return newArgue;
   },
   vote: async (_, { argue, value }, { req }) => {

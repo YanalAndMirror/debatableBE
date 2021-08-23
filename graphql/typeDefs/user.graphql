@@ -4,14 +4,40 @@ type User {
   username: String!
   photo: String
   email: String!
-  activity: [String]
-  argues: [Argue]
-  debates: [Debate]!
+  followed: [String]
   createdAt: Date!
+  notifications: [Notification]
+  debates: [Debate]
+  otherDebates: [Debate]
+  votesCount: Int
+  arguesCount: Int
+  clubs: [Club]
+}
+type Club {
+  _id: ID!
+  name: String
+  photo: String
+  slug: String
+  admin: String
+  inviteType: String
+  inviteLink: String
+  users: [ClubUser]
+}
+type ClubUser {
+  _id: ID!
+  username: String
+  photo: String
 }
 type userWithToken {
   token: String!
   user: User!
+}
+type Notification {
+  text: String
+  debate: Debate
+  argue: String
+  seen: Boolean
+  createdAt: Date
 }
 # Inputs
 input UserCreateInput {
@@ -21,7 +47,8 @@ input UserCreateInput {
 }
 
 input UserUpdateInput {
-  username: String!
-  password: String!
-  email: String!
+  username: String
+  photo: String
+  password: String
+  email: String
 }
