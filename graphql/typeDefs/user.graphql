@@ -11,6 +11,22 @@ type User {
   otherDebates: [Debate]
   votesCount: Int
   arguesCount: Int
+  clubs: [Club]
+}
+type Club {
+  _id: ID!
+  name: String
+  photo: String
+  slug: String
+  admin: String
+  inviteType: String
+  inviteLink: String
+  users: [ClubUser]
+}
+type ClubUser {
+  _id: ID!
+  username: String
+  photo: String
 }
 type userWithToken {
   token: String!

@@ -16,6 +16,7 @@ const DebateSchema = new mongoose.Schema(
       type: String,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    club: { type: mongoose.Schema.Types.ObjectId, ref: "Club" },
     createdAt: {
       type: Date,
       default: Date.now,

@@ -18,6 +18,7 @@ const debateQueries = {
     if (keyword) {
       filter.title = { $regex: ".*" + keyword + ".*", $options: "i" };
     }
+    filter.club = null;
     return await Debate.find(filter)
       .populate("tags room")
       .sort(orderBy)

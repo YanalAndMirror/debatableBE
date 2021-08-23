@@ -59,5 +59,10 @@ UserSchema.virtual("votesCount", {
   foreignField: "user",
   count: true,
 });
+UserSchema.virtual("clubs", {
+  ref: "Club",
+  localField: "_id",
+  foreignField: "users",
+});
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

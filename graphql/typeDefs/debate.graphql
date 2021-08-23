@@ -45,6 +45,7 @@ input DebateCreateInput {
   photo: String!
   argue: String!
   tags: [String]
+  club: String
 }
 input RoomCreateInput {
   debate: String

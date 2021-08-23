@@ -3,19 +3,23 @@ const Room = require("../../../models/Room.model");
 
 const Argue = require("../../../models/Argue.model");
 const Tag = require("../../../models/Tag.model");
+const Club = require("../../../models/Club.model");
 
 const debateMutations = {
   createDebate: async (
     _,
-    { debate: { title, argue, photo, tags } },
+    { debate: { title, argue, photo, tags, club } },
     { req }
   ) => {
     if (!req.user) return null;
+    let myClub = await Club.findById(club);
+    if (!myClub.users.includes(req.user)) return null;
     let newDebate = await Debate.create({
       title,
       photo,
       user: req.user,
       tags,
+      club,
     });
     await Argue.create({
       content: argue,
