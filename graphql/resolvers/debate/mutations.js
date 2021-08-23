@@ -33,9 +33,9 @@ const debateMutations = {
     if (!req.user) return null;
     let oldRoom = await Room.findOne({ debate });
     if (oldRoom && oldRoom.live) {
-      console.log("here");
       return oldRoom;
     }
+    console.log(oldRoom);
     await Room.deleteOne({ debate });
     let newRoom = await Room.create({
       title,

@@ -29,6 +29,7 @@ type DebateDetail {
   arguesCount: Int
   slug: String!
   argues: [Argue]
+  room: Room
 }
 type Tag {
   _id: ID!

@@ -54,6 +54,16 @@ const userMutations = {
       }
     );
   },
+  unfollow: async (_, { debate }, { req }) => {
+    if (!req.user) return null;
+    return await User.findOneAndUpdate(
+      { _id: req.user },
+      { $pull: { followed: debate } },
+      {
+        new: true,
+      }
+    );
+  },
   clearNotifications: async (_, __, { req }) => {
     if (!req.user) return null;
     await Notification.updateMany({ seen: false }, { seen: true });
