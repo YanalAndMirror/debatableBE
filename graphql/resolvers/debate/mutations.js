@@ -12,8 +12,9 @@ const debateMutations = {
     { req }
   ) => {
     if (!req.user) return null;
+
     let myClub = await Club.findById(club);
-    if (!myClub.users.includes(req.user)) return null;
+    if (myClub && !myClub.users.includes(req.user)) return null;
     let newDebate = await Debate.create({
       title,
       photo,
