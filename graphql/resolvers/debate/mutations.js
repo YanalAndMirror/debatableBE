@@ -1,9 +1,9 @@
-const Debate = require("../../../models/Debate.model");
-const Room = require("../../../models/Room.model");
+const Debate = require('../../../models/Debate.model');
+const Room = require('../../../models/Room.model');
 
-const Argue = require("../../../models/Argue.model");
-const Tag = require("../../../models/Tag.model");
-const Club = require("../../../models/Club.model");
+const Argue = require('../../../models/Argue.model');
+const Tag = require('../../../models/Tag.model');
+const Club = require('../../../models/Club.model');
 
 const debateMutations = {
   createDebate: async (
@@ -32,8 +32,10 @@ const debateMutations = {
   createRoom: async (_, { room: { title, debate } }, { req }) => {
     if (!req.user) return null;
     let oldRoom = await Room.findOne({ debate });
+    console.log(oldRoom);
+
     if (oldRoom && oldRoom.live) {
-      console.log("here");
+      // console.log(oldRoom);
       return oldRoom;
     }
     await Room.deleteOne({ debate });
@@ -48,7 +50,7 @@ const debateMutations = {
     if (!req.user) return null;
     return await Room.findOneAndUpdate(
       { slug },
-      { status: "live" },
+      { status: 'live' },
       { new: true }
     );
   },
