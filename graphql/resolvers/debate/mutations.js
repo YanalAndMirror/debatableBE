@@ -22,6 +22,7 @@ const debateMutations = {
       tags,
       club,
     });
+    //test
     await Argue.create({
       content: argue,
       debate: newDebate._id,
