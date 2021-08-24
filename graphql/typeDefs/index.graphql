@@ -40,6 +40,8 @@ type Mutation {
   clearNotifications: User
   "Follow a debate"
   follow(debate: String!): User
+  "unfollow a debate"
+  unfollow(debate: String!): User
   "Create a new debate , with one main argue"
   createDebate(debate: DebateCreateInput!): Debate
   "Add 1 view to debate"

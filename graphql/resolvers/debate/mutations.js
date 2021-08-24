@@ -12,8 +12,9 @@ const debateMutations = {
     { req }
   ) => {
     if (!req.user) return null;
+
     let myClub = await Club.findById(club);
-    if (!myClub.users.includes(req.user)) return null;
+    if (myClub && !myClub.users.includes(req.user)) return null;
     let newDebate = await Debate.create({
       title,
       photo,
@@ -35,9 +36,9 @@ const debateMutations = {
     console.log(oldRoom);
 
     if (oldRoom && oldRoom.live) {
-      // console.log(oldRoom);
       return oldRoom;
     }
+    console.log(oldRoom);
     await Room.deleteOne({ debate });
     let newRoom = await Room.create({
       title,
