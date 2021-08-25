@@ -13,9 +13,12 @@ type Query {
     amount: Int
     tag: String
     keyword: String
+    club: String
   ): [Debate]
 
   debate(slug: String!): DebateDetail
+  clubs: Clubs
+  club(slug: String!): ClubDetail
   rooms(
     order: String
     start: Int
@@ -53,7 +56,9 @@ type Mutation {
   roomStatus(slug: String): Room
   createClub(name: String, photo: String, inviteType: String): Club
   useInviteLink(inviteLink: String): Club
-  updateInviteLink(slug: String): Club
+  joinClub(club: String): Club
+
+  updateInviteLink(slug: String): ClubDetail
   removeFromClub(slug: String, user: String): Club
 
   updateDebate(id: ID!, debate: DebateUpdateInput!): Debate!

@@ -22,6 +22,27 @@ const userQueries = {
     ];
     return thisUser;
   },
+  clubs: async (_, __, { req }) => {
+    const otherClubs = await Club.find({
+      inviteType: "any",
+      users: { $ne: req.user },
+    });
+    const myClubs = await Club.find({ users: req.user });
+
+    return {
+      myClubs,
+      otherClubs,
+    };
+  },
+  club: async (_, { slug }, { req }) => {
+    if (!req.user) return null;
+    if (slug === "public") return null;
+    const myClub = await Club.findOne({ users: req.user, slug }).populate(
+      "users"
+    );
+    if (req.user !== myClub.admin.toString()) myClub.inviteLink = null;
+    return myClub;
+  },
 };
 
 export default userQueries;
