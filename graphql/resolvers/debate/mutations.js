@@ -45,7 +45,6 @@ const debateMutations = {
     if (oldRoom && oldRoom.live) {
       return oldRoom;
     }
-    console.log(oldRoom);
     await Room.deleteOne({ debate });
     let newRoom = await Room.create({
       title,

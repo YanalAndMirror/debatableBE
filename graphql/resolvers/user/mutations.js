@@ -106,7 +106,6 @@ const userMutations = {
   },
   joinClub: async (_, { club }, { req }) => {
     if (!req.user) return null;
-    console.log(req.user);
     let myClub = await Club.findOneAndUpdate(
       { _id: club, users: { $ne: req.user } },
       {
