@@ -14,7 +14,13 @@ const debateMutations = {
     if (!req.user) return null;
 
     let myClub = await Club.findById(club);
+    if (myClub) {
+      if (!myClub.users.includes(req.user)) return null;
+    } else {
+      club = null;
+    }
     if (myClub && !myClub.users.includes(req.user)) return null;
+
     let newDebate = await Debate.create({
       title,
       photo,
@@ -22,6 +28,7 @@ const debateMutations = {
       tags,
       club,
     });
+    //test
     await Argue.create({
       content: argue,
       debate: newDebate._id,

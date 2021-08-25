@@ -57,6 +57,7 @@ export const reconstructNotifications = async (argue) => {
       raw,
     });
     // Sent socket.io/Subscription -> to frontEnd
+    //
   });
   await Notification.create(notifcationsList);
 };

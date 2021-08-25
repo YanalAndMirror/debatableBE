@@ -17,5 +17,11 @@ const ClubSchema = new mongoose.Schema(
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+ClubSchema.virtual("debates", {
+  ref: "Debate",
+  localField: "_id",
+  foreignField: "club",
+  justOne: false,
+});
 const Club = mongoose.model("Club", ClubSchema);
 module.exports = Club;

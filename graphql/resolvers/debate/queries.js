@@ -1,9 +1,10 @@
 const Tag = require("../../../models/Tag.model");
 const Debate = require("../../../models/Debate.model");
 const Room = require("../../../models/Room.model");
+const Club = require("../../../models/Club.model");
 
 const debateQueries = {
-  debates: async (_, { order, start, amount, tag, keyword }) => {
+  debates: async (_, { order, start, amount, tag, keyword, club }, { req }) => {
     const orderBy = {};
     const filter = {};
     if (order === "new") orderBy.createdAt = "descending";
@@ -18,18 +19,28 @@ const debateQueries = {
     if (keyword) {
       filter.title = { $regex: ".*" + keyword + ".*", $options: "i" };
     }
-    filter.club = null;
+    let myClub = await Club.findOne({ slug: club });
+    if (myClub) {
+      if (!myClub.users.includes(req.user)) return null;
+      filter.club = myClub._id;
+    } else {
+      filter.club = null;
+    }
     return await Debate.find(filter)
       .populate("tags room")
       .sort(orderBy)
       .skip(start)
       .limit(amount);
   },
-  debate: async (_, { slug }) => {
+  debate: async (_, { slug }, { req }) => {
     let thisDebate = await Debate.findOneAndUpdate(
       { slug },
       { $inc: { views: 1 } }
     ).populate("argues room");
+    if (thisDebate.club) {
+      let myClub = await Club.findById(thisDebate.club);
+      if (myClub && !myClub.users.includes(req.user)) return null;
+    }
     return thisDebate;
   },
   tags: async () => {
@@ -51,13 +62,19 @@ const debateQueries = {
       filter.title = { $regex: ".*" + keyword + ".*", $options: "i" };
     }
     return await Room.find(filter)
-      .populate("tags debate")
+      .populate({
+        path: "debate",
+        populate: { path: "tags" },
+      })
       .sort(orderBy)
       .skip(start)
       .limit(amount);
   },
   room: async (_, { slug }) => {
-    let thisRoom = await Room.findOne({ slug }).populate("debate");
+    let thisRoom = await Room.findOne({ slug }).populate({
+      path: "debate",
+      populate: { path: "tags" },
+    });
     return thisRoom;
   },
 };
