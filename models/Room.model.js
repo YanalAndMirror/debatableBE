@@ -8,7 +8,6 @@ const RoomSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "Off",
     },
     vote: [
       {

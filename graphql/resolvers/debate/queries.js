@@ -61,7 +61,7 @@ const debateQueries = {
     if (keyword) {
       filter.title = { $regex: ".*" + keyword + ".*", $options: "i" };
     }
-    return await Room.find(filter)
+    let myRooms = await Room.find(filter)
       .populate({
         path: "debate",
         populate: { path: "tags" },
@@ -69,6 +69,11 @@ const debateQueries = {
       .sort(orderBy)
       .skip(start)
       .limit(amount);
+
+    myRooms = myRooms.filter((room) => {
+      return room.live === true;
+    });
+    return myRooms;
   },
   room: async (_, { slug }) => {
     let thisRoom = await Room.findOne({ slug }).populate({

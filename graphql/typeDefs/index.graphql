@@ -53,7 +53,7 @@ type Mutation {
   addTag(title: String, photo: String): Tag
   "create a room"
   createRoom(room: RoomCreateInput!): Room
-  roomStatus(slug: String): Room
+  roomStatus(slug: String, status: String): Room
   createClub(name: String, photo: String, inviteType: String): Club
   useInviteLink(inviteLink: String): Club
   joinClub(club: String): Club
