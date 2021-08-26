@@ -1,3 +1,5 @@
+import { io } from "../app";
+
 const Argue = require("../models/Argue.model");
 const User = require("../models/User.model");
 const Notification = require("../models/Notification.model");
@@ -9,16 +11,19 @@ export const reconstructNotifications = async (argue) => {
     _id: { $ne: thisArgue.user._id },
   });
   const previousNotifications = await Notification.find({
-    user: { $in: [followers.map((f) => f._id)] },
+    user: { $in: followers.map((f) => f._id) },
     seen: false,
     debate: thisArgue.debate._id,
   });
+
   await Notification.deleteMany({
-    user: { $in: [followers.map((f) => f._id)] },
+    user: { $in: followers.map((f) => f._id) },
     seen: false,
     debate: thisArgue.debate._id,
   });
+
   const notifcationsList = [];
+
   followers.forEach((follower) => {
     let followerNotification = previousNotifications.find(
       (n) => n.user.toString() === follower._id.toString()
@@ -57,6 +62,19 @@ export const reconstructNotifications = async (argue) => {
       raw,
     });
     // Sent socket.io/Subscription -> to frontEnd
+    if (follower.socketId.length > 0) {
+      follower.socketId.forEach((s) =>
+        io.to(s).emit("notifcation", {
+          text,
+          debate: {
+            title: thisArgue.debate.title,
+            photo: thisArgue.debate.photo,
+            slug: thisArgue.debate.slug,
+          },
+          argue: thisArgue._id.toString(),
+        })
+      );
+    }
     //
   });
   await Notification.create(notifcationsList);

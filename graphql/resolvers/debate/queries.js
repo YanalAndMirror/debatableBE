@@ -1,3 +1,5 @@
+import { io } from "../../../app";
+
 const Tag = require("../../../models/Tag.model");
 const Debate = require("../../../models/Debate.model");
 const Room = require("../../../models/Room.model");
@@ -5,6 +7,7 @@ const Club = require("../../../models/Club.model");
 
 const debateQueries = {
   debates: async (_, { order, start, amount, tag, keyword, club }, { req }) => {
+    io.sockets.to("hadidi2").emit("notifcation", "message");
     const orderBy = {};
     const filter = {};
     if (order === "new") orderBy.createdAt = "descending";
