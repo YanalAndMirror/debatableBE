@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
   photo: {
     type: String,
   },
+  socketId: [String],
   email: {
     type: String,
     required: [true, "Please add your email"],

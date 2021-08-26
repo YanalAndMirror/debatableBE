@@ -18,6 +18,16 @@ type Club {
   name: String
   photo: String
   slug: String
+}
+type Clubs {
+  myClubs: [Club]
+  otherClubs: [Club]
+}
+type ClubDetail {
+  _id: ID!
+  name: String
+  photo: String
+  slug: String
   admin: String
   inviteType: String
   inviteLink: String

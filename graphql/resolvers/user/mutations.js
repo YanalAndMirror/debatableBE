@@ -95,8 +95,19 @@ const userMutations = {
   },
   useInviteLink: async (_, { inviteLink }, { req }) => {
     if (!req.user) return null;
-    let myClub = await findOneAndUpdate(
-      { inviteLink },
+    let myClub = await Club.findOneAndUpdate(
+      { inviteLink, users: { $ne: req.user } },
+      {
+        $push: { users: req.user },
+      },
+      { new: true }
+    );
+    return myClub;
+  },
+  joinClub: async (_, { club }, { req }) => {
+    if (!req.user) return null;
+    let myClub = await Club.findOneAndUpdate(
+      { _id: club, users: { $ne: req.user } },
       {
         $push: { users: req.user },
       },
@@ -116,7 +127,7 @@ const userMutations = {
     for (var i = 0; i < 11; i++) {
       inviteLink += c.charAt(Math.floor(Math.random() * c.length));
     }
-    return await findOneAndUpdate({ slug }, { inviteLink }, { new: true });
+    return await Club.findOneAndUpdate({ slug }, { inviteLink }, { new: true });
   },
   removeFromClub: async (_, { user, slug }, { req }) => {
     if (!req.user) return null;
@@ -125,7 +136,7 @@ const userMutations = {
     // admin or himself can remove
     if (myClub.admin !== req.user && user !== req.user) return null;
 
-    return await findOneAndUpdate(
+    return await Club.findOneAndUpdate(
       { inviteLink },
       {
         $pull: { users: user },

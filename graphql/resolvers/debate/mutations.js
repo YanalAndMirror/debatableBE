@@ -12,8 +12,15 @@ const debateMutations = {
     { req }
   ) => {
     if (!req.user) return null;
+
     let myClub = await Club.findById(club);
-    if (!myClub.users.includes(req.user)) return null;
+    if (myClub) {
+      if (!myClub.users.includes(req.user)) return null;
+    } else {
+      club = null;
+    }
+    if (myClub && !myClub.users.includes(req.user)) return null;
+
     let newDebate = await Debate.create({
       title,
       photo,
@@ -21,6 +28,7 @@ const debateMutations = {
       tags,
       club,
     });
+    //test
     await Argue.create({
       content: argue,
       debate: newDebate._id,
@@ -35,7 +43,6 @@ const debateMutations = {
     if (oldRoom && oldRoom.live) {
       return oldRoom;
     }
-    console.log(oldRoom);
     await Room.deleteOne({ debate });
     let newRoom = await Room.create({
       title,
@@ -44,13 +51,9 @@ const debateMutations = {
     });
     return newRoom;
   },
-  roomStatus: async (_, { slug }, { req }) => {
+  roomStatus: async (_, { slug, status }, { req }) => {
     if (!req.user) return null;
-    return await Room.findOneAndUpdate(
-      { slug },
-      { status: "live" },
-      { new: true }
-    );
+    return await Room.findOneAndUpdate({ slug }, { status }, { new: true });
   },
   addDebateView: async (_, { debate }) => {
     return await Debate.findByIdAndUpdate(
