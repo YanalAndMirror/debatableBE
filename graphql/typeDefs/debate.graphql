@@ -11,6 +11,7 @@ type Debate {
   tags: [Tag]
   views: Int
   room: Room
+  user: User
 }
 type Room {
   _id: ID!
@@ -30,6 +31,7 @@ type DebateDetail {
   slug: String!
   argues: [Argue]
   room: Room
+  user: User
 }
 type Tag {
   _id: ID!

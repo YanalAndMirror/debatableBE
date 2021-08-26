@@ -53,7 +53,7 @@ const debateMutations = {
     });
     return newRoom;
   },
-  roomStatus: async (_, { slug }, { req }) => {
+  roomStatus: async (_, { slug, status }, { req }) => {
     if (!req.user) return null;
     return await Room.findOneAndUpdate(
       { slug },
