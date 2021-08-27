@@ -1,3 +1,5 @@
+import User from "./models/User.model";
+
 const connectDb = require("./db");
 const express = require("express");
 const tokenValidate = require("./middlewares/tokenValidate");
@@ -23,6 +25,8 @@ connectDb();
 
 const apolloServer = require("./graphql/index");
 const startServer = async () => {
+  await User.updateMany({}, { socketId: [] });
+
   await apolloServer.start();
   app.use(tokenValidate);
   app.use("/upload", express.static("upload"));
