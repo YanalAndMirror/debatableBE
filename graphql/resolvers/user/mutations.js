@@ -1,5 +1,3 @@
-import { findOneAndUpdate } from "../../../models/User.model";
-
 const { sign } = require("jsonwebtoken");
 const User = require("../../../models/User.model");
 const Club = require("../../../models/Club.model");

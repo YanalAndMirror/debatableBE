@@ -2,7 +2,6 @@
   "name": "debatablebe",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "author": "yanalshmilan <yshmilan@gmail.com>",
   "license": "MIT",
   "scripts": {

@@ -1,10 +1,10 @@
-import { io } from "../app";
+const { io } = require("../app");
 
 const Argue = require("../models/Argue.model");
 const User = require("../models/User.model");
 const Notification = require("../models/Notification.model");
 
-export const reconstructNotifications = async (argue) => {
+exports.reconstructNotifications = async (argue) => {
   const thisArgue = await Argue.findById(argue).populate("user debate");
   const followers = await User.find({
     followed: thisArgue.debate._id,

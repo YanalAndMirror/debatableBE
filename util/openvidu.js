@@ -1,5 +1,6 @@
-import axios from "axios";
-import { OPENVIDU_SERVER_SECRET, OPENVIDU_SERVER_URL } from "../ovKey";
+const axios = require("axios");
+
+const { OPENVIDU_SERVER_SECRET, OPENVIDU_SERVER_URL } = require("../ovKey");
 const https = require("https");
 
 exports.openViduToken = async (req, res) => {
