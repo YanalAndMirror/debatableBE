@@ -1,5 +1,3 @@
-import User from "./models/User.model";
-
 const connectDb = require("./db");
 const express = require("express");
 const tokenValidate = require("./middlewares/tokenValidate");
