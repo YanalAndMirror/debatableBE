@@ -23,8 +23,6 @@ connectDb();
 
 const apolloServer = require("./graphql/index");
 const startServer = async () => {
-  await User.updateMany({}, { socketId: [] });
-
   await apolloServer.start();
   app.use(tokenValidate);
   app.use("/upload", express.static("upload"));
