@@ -143,5 +143,4 @@ const userMutations = {
     );
   },
 };
-
-export default userMutations;
+module.exports = userMutations;

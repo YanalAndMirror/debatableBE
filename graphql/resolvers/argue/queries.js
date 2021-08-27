@@ -1,10 +1,10 @@
-const Argue = require('../../../models/Argue.model');
+const Argue = require("../../../models/Argue.model");
 
 const argueQueries = {
   argues: async (_, { filter }) => {
-    const argues = await Argue.find(filter).populate('argues user');
+    const argues = await Argue.find(filter).populate("argues user");
     return argues;
   },
 };
 
-export default argueQueries;
+module.exports = argueQueries;
