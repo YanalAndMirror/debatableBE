@@ -45,4 +45,4 @@ const userQueries = {
   },
 };
 
-export default userQueries;
+module.exports = userQueries;

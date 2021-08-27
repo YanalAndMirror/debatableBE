@@ -92,4 +92,4 @@ const debateMutations = {
   updateDebate: async (_, args) => {},
 };
 
-export default debateMutations;
+module.exports = debateMutations;

@@ -1,2 +1,2 @@
-export { default as userMutations } from './mutations';
-export { default as userQueries } from './queries';
+exports.userMutations = require("./mutations");
+exports.userQueries = require("./queries");

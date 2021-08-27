@@ -1,2 +1,2 @@
-export { default as debateMutations } from './mutations';
-export { default as debateQueries } from './queries';
+exports.debateMutations = require("./mutations");
+exports.debateQueries = require("./queries");

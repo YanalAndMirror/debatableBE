@@ -84,4 +84,4 @@ const debateQueries = {
   },
 };
 
-export default debateQueries;
+module.exports = debateQueries;

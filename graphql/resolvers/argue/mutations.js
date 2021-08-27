@@ -75,4 +75,4 @@ const argueMutations = {
   },
 };
 
-export default argueMutations;
+module.exports = argueMutations;

@@ -1,2 +1,2 @@
-export { default as argueMutations } from './mutations';
-export { default as argueQueries } from './queries';
+exports.argueMutations = require("./mutations");
+exports.argueQueries = require("./queries");
