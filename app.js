@@ -39,6 +39,8 @@ const startServer = async () => {
   app.post("/openViduToken", openViduToken);
 
   apolloServer.applyMiddleware({ app: app });
-  server.listen(4000, () => console.log("server is running on port 4000"));
+  server.listen(process.env.SERVER_PORT, () =>
+    console.log("server is running on port " + process.env.SERVER_PORT)
+  );
 };
 startServer();
