@@ -6,6 +6,7 @@ type Argue {
   parent: String
   createdAt: Date!
   votes: Votes
+  user: User
 }
 type Votes {
   number: Int

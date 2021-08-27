@@ -40,6 +40,7 @@ const debateMutations = {
   createRoom: async (_, { room: { title, debate } }, { req }) => {
     if (!req.user) return null;
     let oldRoom = await Room.findOne({ debate });
+
     if (oldRoom && oldRoom.live) {
       return oldRoom;
     }
@@ -53,7 +54,11 @@ const debateMutations = {
   },
   roomStatus: async (_, { slug, status }, { req }) => {
     if (!req.user) return null;
-    return await Room.findOneAndUpdate({ slug }, { status }, { new: true });
+    return await Room.findOneAndUpdate(
+      { slug },
+      { status: "live" },
+      { new: true }
+    );
   },
   addDebateView: async (_, { debate }) => {
     return await Debate.findByIdAndUpdate(
