@@ -1,6 +1,6 @@
-const { argueQueries, argueMutations } = require('./argue');
-const { debateQueries, debateMutations } = require('./debate');
-const { userQueries, userMutations } = require('./user');
+const { argueQueries, argueMutations } = require("./argue");
+const { debateQueries, debateMutations } = require("./debate");
+const { userQueries, userMutations } = require("./user");
 
 const resolvers = {
   Query: {

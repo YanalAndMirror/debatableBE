@@ -1,14 +1,15 @@
-const { join } = require("path");
+const path = require("path");
 const { readdirSync, readFileSync } = require("fs");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const resolvers = require("./resolvers");
+const modelsDir = path.resolve(process.cwd(), "graphql/typedefs");
 
-const gqlFiles = readdirSync(join(__dirname, "./typedefs"));
+const gqlFiles = readdirSync(modelsDir);
 
 let typeDefs = "";
 
 gqlFiles.forEach((file) => {
-  typeDefs += readFileSync(join(__dirname, "./typedefs", file), {
+  typeDefs += readFileSync(path.join(modelsDir, file), {
     encoding: "utf8",
   });
 });
