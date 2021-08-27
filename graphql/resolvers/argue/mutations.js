@@ -1,4 +1,5 @@
-import { reconstructNotifications } from "../../../util/notifications";
+const { reconstructNotifications } = require("../../../util/notifications");
+
 const Argue = require("../../../models/Argue.model");
 const Vote = require("../../../models/Vote.model");
 const Debate = require("../../../models/Debate.model");

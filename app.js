@@ -1,5 +1,4 @@
-import User from "./models/User.model";
-
+const User = require("./models/User.model");
 const connectDb = require("./db");
 const express = require("express");
 const tokenValidate = require("./middlewares/tokenValidate");
@@ -15,11 +14,12 @@ const app = express();
 app.use(cors());
 
 const server = http.createServer(app);
-export const io = socketio(server, {
+const io = socketio(server, {
   cors: {
     origin: "*",
   },
 });
+exports.io = io;
 SocketIo(io);
 connectDb();
 

@@ -1,5 +1,5 @@
-import User from "../../../models/User.model";
-import Club from "../../../models/Club.model";
+const User = require("../../../models/User.model");
+const Club = require("../../../models/Club.model");
 
 const userQueries = {
   users: async () => {
