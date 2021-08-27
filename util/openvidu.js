@@ -7,7 +7,6 @@ exports.openViduToken = async (req, res) => {
     if (req.body.room) res.status(201).json(await createToken(req.body.room));
     else res.status(404).json("error");
   } catch (e) {
-    console.log(e.message);
     res.status(404).json("error");
   }
 };
