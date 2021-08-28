@@ -37,7 +37,6 @@ type Tag {
   _id: ID!
   title: String
   photo: String
-  slug: String
 }
 type roomVote {
   user: String!
