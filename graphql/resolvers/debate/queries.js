@@ -36,7 +36,9 @@ const debateQueries = {
     let thisDebate = await Debate.findOneAndUpdate(
       { slug },
       { $inc: { views: 1 } }
-    ).populate("argues room user");
+    )
+      .populate("room user")
+      .populate({ path: "argues", populate: { path: "user" } });
     if (thisDebate.club) {
       let myClub = await Club.findById(thisDebate.club);
       if (myClub && !myClub.users.includes(req.user)) return null;
