@@ -13,7 +13,7 @@ const argueMutations = {
   ) => {
     if (!req.user) return null;
     let thisDebate = await Debate.findById(debate).populate("club");
-    if (thisDebate.club && !thisDebaate.club.users.includes(req.user))
+    if (thisDebate.club && !thisDebate.club.users.includes(req.user))
       return null;
     let checkParicipation = await Argue.findOne({ user: req.user, debate });
     let newArgue = await Argue.create({
